@@ -23,11 +23,20 @@ export default class Card extends Component {
 				null,
 				{ dx: this.pan.x, dy: this.pan.y }
 			]),
-			onPanResponderRelease: () => {
-				Animated.spring(this.pan, {
-					toValue: { x: 0, y: 0 },
-					friction: 4.5,
-				}).start();
+			onPanResponderRelease: (e, { dx }) => {
+				const absDx = Math.abs(dx);
+				const direction = absDx / dx;
+				if (absDx > 120) {
+					Animated.decay(this.pan, {
+						velocity: { x: 3 * direction, y: 0 },
+						deceleration: 0.995,
+					}).start();
+				} else {
+					Animated.spring(this.pan, {
+						toValue: { x: 0, y: 0 },
+						friction: 4.5,
+					}).start();
+				}
 			}
 		});
 	}
