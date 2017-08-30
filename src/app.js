@@ -3,16 +3,25 @@ import {
 	View,
 	StyleSheet,
 	Text,
-	Image
+	Image,
+	PanResponder
  } from 'react-native';
 
 const fbImage = 'https:\\graph.facebook.com/1405171576/picture?height=500';
 
 class App extends Component {
+	componentWillMount() {
+		this.cardPanResponder = PanResponder.create({
+			onStartShouldSetPanResponder: () => true,
+			onPanResponderMove: (e, gesture) => console.log(gesture.moveX),
+			onPanResponderRelease: (e, gesture) => console.log('Release', gesture.moveY)
+		});
+	}
 
 	render() {
 		return (
 		<View
+			{...this.cardPanResponder.panHandlers}
 			style={styles.card}
 		>
 			<Image
