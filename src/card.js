@@ -8,10 +8,9 @@ import {
 	Animated,
 	Dimensions,
  } from 'react-native';
+import moment from 'moment';
 
 const { width, height } = Dimensions.get('window');
-
-const fbImage = 'https:\\graph.facebook.com/1405171576/picture?height=500';
 
 export default class Card extends Component {
 	componentWillMount() {
@@ -53,6 +52,11 @@ export default class Card extends Component {
 				{ rotate: rotateCard },
 			]
 		};
+
+		const { birthday, name, bio, id } = this.props.profile;
+		const fbImage = `https:\\graph.facebook.com/${id}/picture?height=500`;
+		const profileBday = moment(birthday, 'MM/DD/YYYY');
+		const profileAge = moment().diff(profileBday, 'years');
 		return (
 		<Animated.View
 			{...this.cardPanResponder.panHandlers}
@@ -63,8 +67,8 @@ export default class Card extends Component {
 			source={{ uri: fbImage }}
 			/>
 			<View style={{ margin: 20 }}>
-				<Text style={{ fontSize: 20 }}>Said, 23</Text>
-				<Text style={{ fontSize: 15, color: 'darkgrey' }}>Engineer</Text>
+				<Text style={{ fontSize: 20 }}>{name}, {profileAge}</Text>
+				<Text style={{ fontSize: 15, color: 'darkgrey' }}>{bio}</Text>
 			</View>
 		</Animated.View>
 	);
