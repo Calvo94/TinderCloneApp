@@ -24,10 +24,16 @@ class App extends Component {
 		});
 	}
 	render() {
+		const rotateCard = this.pan.x.interpolate({
+			inputRange: [-200, 0, 200],
+			outputRange: ['-10deg', '0deg', '10deg'],
+		});
+
 		const AnimatedStyle = {
 			transform: [
 				{ translateX: this.pan.x },
 				{ translateY: this.pan.y },
+				{ rotate: rotateCard },
 			]
 		};
 		return (
