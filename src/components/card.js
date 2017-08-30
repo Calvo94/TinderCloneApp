@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		width: width * 0.9,
 		height: height * 0.7,
-		top: (height * 0.3) / 2,
+		top: (height * 0.1) / 2,
 		overflow: 'hidden',
 		backgroundColor: 'white',
 		margin: 10,
