@@ -9,6 +9,7 @@ import {
 	Dimensions,
  } from 'react-native';
 import moment from 'moment';
+// npm install moment --save
 
 const { width, height } = Dimensions.get('window');
 
