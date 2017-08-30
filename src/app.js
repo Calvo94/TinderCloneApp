@@ -6,13 +6,12 @@ class App extends Component {
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
-			<Card profile={profiles[0]} />
-			<Card profile={profiles[1]} />
-			<Card profile={profiles[2]} />
-			<Card profile={profiles[3]} />
-			<Card profile={profiles[4]} />
-			<Card profile={profiles[5]} />
-			<Card profile={profiles[6]} />
+				{profiles.reverse().map((profile, i) => (
+					<Card
+						key={i}
+						profile={profile}
+					/>
+				))}
 			</View>
 		);
 	}
