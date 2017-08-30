@@ -20,7 +20,12 @@ class App extends Component {
 				null,
 				{ dx: this.pan.x, dy: this.pan.y }
 			]),
-			onPanResponderRelease: (e, gesture) => console.log('Release', gesture.moveY)
+			onPanResponderRelease: () => {
+				Animated.spring(this.pan,{
+					toValue: { x: 0, y: 0 },
+					friction: 4.5,
+				}).start()
+			}
 		});
 	}
 	render() {
