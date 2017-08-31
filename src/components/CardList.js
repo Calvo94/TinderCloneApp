@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import Card from './card';
+import { fetchData } from '../actions';
 
 class CardList extends Component {
 
 	state = {
 		profileIndex: 0,
+	}
+
+	componentWillMount() {
+		this.props.fetchData();
 	}
 
 	nextCard = () => this.setState({ profileIndex: this.state.profileIndex + 1 });
@@ -29,7 +34,14 @@ class CardList extends Component {
 }
 
 const mapStateToProps = state => {
-  return { profiles: state.profiles };
+	console.log(state);
+  return { profiles: state.profiles.data, error: state.profiles.error };
 };
 
-export default connect(mapStateToProps)(CardList);
+const mapDispatchToProps = dispatch => {
+	return {
+		fetchData: () => dispatch(fetchData())
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardList);
